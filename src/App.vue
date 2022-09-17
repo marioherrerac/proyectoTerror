@@ -1,31 +1,29 @@
-<script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
+<!-- src/App.vue -->
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <div id="app" class="container">
+    <div class="row" style="margin-top: 5%">
+      <router-link class="button button-primary" 
+       style="margin-right: 10px;" to="/movie">Movies
+      </router-link> 
+      <router-link class="button button-primary" 
+       style="margin-right: 10px;" to="/director">Directors
+      </router-link>
+      <router-link class="button button-primary" 
+       to="/producer">Producers
+      </router-link>
+    </div>
+    <router-view
+      v-bind:movies="movies">
+    </router-view>
   </div>
-  <HelloWorld msg="Vite + Vue" />
+ 
 </template>
-
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
+<script>
+export default {
+  data() {
+    return {
+      movies: []
+    }
+  }
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
+</script>
