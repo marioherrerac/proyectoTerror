@@ -35,34 +35,34 @@
          </template>
          <script>
          export default {
-           props: ['producers'],
-           data: function() {
-             return {
-               title: 'ProducersList'
-             }
-           },
-           created () {
-             this.allProducer()
-           },
+          data() {
+            return {
+             producers: [],
+              title: 'ProducerList'
+    }
+  },
            methods: {
              allProducer() {
-               fetch('/server/producer',
+              fetch('/.netlify/functions/producer',
                  { headers: {'Accept': 'application/json'}})
                  .then((response) => response.json())
-                 .then((data) => {
-                   app.producers = data;
+                 .then((result) => {
+                   this.producers = data;
                  })
               },
               deleteProducer(id) {
-                fetch('/server/producer/'+id,
+                fetch('/.netlify/functions/producer/'+id,
                   { headers: {'Content-Type': 'application/json'},
                               method: 'POST',
                     body: JSON.stringify({'_method':'DELETE'})})
-                  .then((data) => {
+                  .then((result) => {
                    this.allProducer();
                    }
                  )
               }
+           },
+           mounted(){
+            this.allProducer()
            }
          }
          </script>

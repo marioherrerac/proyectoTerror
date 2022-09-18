@@ -44,6 +44,9 @@
            </div>
          </template>
          <script>
+
+import { useRoute } from 'vue-router'
+
          export default {
            props: ['create','edit','show'],
            data: function() {
@@ -53,37 +56,37 @@
              }
            },
            created () {
-            this.findDirector(app.$route.params.id)
+            const route = useRoute();  
+            this.findDirector(route.params.id)
            },
            methods: {
              findDirector: function(id) {
-               var director = app.directors.find(
-                 function(x) { return x.id == id; });
-               if (director!=null)
-                 Object.assign(this.director,director);
+              fetch('/.netlify/functions/director/'+id,
+        { headers: {'Accept': 'application/json'}})
+        .then((response) => response.json())
+        .then((result) => {
+          this.director = result;
+        })
              },
              updateDirector: function() {
-               this.prof['_method'] = 'PUT';
-               var id = app.$route.params.id;
-               fetch('/server/director/'+id,
-                 { headers: {'Content-Type':'application/json'},
-                   method: 'POST',
-                   body: JSON.stringify(this.director)})
-                 .then((data) => {
-                   var index = app.directors.findIndex(
-                      function(x) { return x.id == id; });
-                   app.directors[index] = this.director;
-                   router.push('/director');
-                 }
-               )
+              this.prof['_method'] = 'PUT';
+      const route = useRoute(); 
+      var id = route.params.id;
+      fetch('/.netlify/functions/director/'+id,
+        { headers: {'Content-Type':'application/json'},
+          method: 'POST',
+          body: JSON.stringify(this.director)})
+        .then((data) => {
+          router.push('/director');
+        }
+      )
              },
-             createMovie: function() {
-               fetch('/server/director',
+             createDirector: function() {
+              fetch('/.netlify/functions/director',
                  { headers: {'Content-Type':'application/json'},
                    method: 'POST',
                    body: JSON.stringify(this.director)})
                  .then((data) => {
-                    app.directors.push(this.director);
                     router.push('/director');
                  }
                )

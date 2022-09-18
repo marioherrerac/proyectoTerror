@@ -44,6 +44,9 @@
            </div>
          </template>
          <script>
+
+import { useRoute } from 'vue-router'
+
          export default {
            props: ['create','edit','show'],
            data: function() {
@@ -53,37 +56,37 @@
              }
            },
            created () {
-            this.findProducer(app.$route.params.id)
+            const route = useRoute();  
+            this.findProducer(route.params.id)
            },
            methods: {
              findProducer: function(id) {
-               var producer = app.producers.find(
-                 function(x) { return x.id == id; });
-               if (producer!=null)
-                 Object.assign(this.producer,producer);
+              fetch('/.netlify/functions/producer/'+id,
+        { headers: {'Accept': 'application/json'}})
+        .then((response) => response.json())
+        .then((result) => {
+          this.producer = result;
+        }) 
              },
              updateProducer: function() {
-               this.prof['_method'] = 'PUT';
-               var id = app.$route.params.id;
-               fetch('/server/producer/'+id,
-                 { headers: {'Content-Type':'application/json'},
-                   method: 'POST',
-                   body: JSON.stringify(this.producer)})
-                 .then((data) => {
-                   var index = app.producers.findIndex(
-                      function(x) { return x.id == id; });
-                   app.producers[index] = this.producer;
-                   router.push('/producer');
-                 }
-               )
+              this.prof['_method'] = 'PUT';
+      const route = useRoute(); 
+      var id = route.params.id;
+      fetch('/.netlify/functions/producer/'+id,
+        { headers: {'Content-Type':'application/json'},
+          method: 'POST',
+          body: JSON.stringify(this.producer)})
+        .then((data) => {
+          router.push('/producer');
+        }
+      )
              },
              createProducer: function() {
-               fetch('/server/producer',
+              fetch('/.netlify/functions/producer',
                  { headers: {'Content-Type':'application/json'},
                    method: 'POST',
                    body: JSON.stringify(this.producer)})
                  .then((data) => {
-                    app.producers.push(this.producer);
                     router.push('/producer');
                  }
                )

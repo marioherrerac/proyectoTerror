@@ -35,34 +35,34 @@
          </template>
          <script>
          export default {
-           props: ['directors'],
-           data: function() {
-             return {
-               title: 'DirectorsList'
-             }
-           },
-           created () {
-             this.allDirector()
-           },
+          data() {
+            return {
+             directors: [],
+              title: 'DirectorList'
+    }
+  },
            methods: {
              allDirector() {
-               fetch('/server/director',
+               fetch('/.netlify/functions/director',
                  { headers: {'Accept': 'application/json'}})
                  .then((response) => response.json())
-                 .then((data) => {
-                   app.directors = data;
+                 .then((result) => {
+                   this.directors = data;
                  })
               },
               deleteDirector(id) {
-                fetch('/server/director/'+id,
+                fetch('/.netlify/functions/director/'+id,
                   { headers: {'Content-Type': 'application/json'},
                               method: 'POST',
                     body: JSON.stringify({'_method':'DELETE'})})
-                  .then((data) => {
+                  .then((result) => {
                    this.allDirector();
                    }
                  )
               }
+           },
+           mounted(){
+            this.allDirector()
            }
          }
          </script>
