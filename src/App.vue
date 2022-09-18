@@ -12,18 +12,24 @@
        to="/producer">Producers
       </router-link>
     </div>
-    <router-view
+    <!-- <router-view
       v-bind:movies="movies">
+    </router-view>
+  -->
+    <router-view>
     </router-view>
   </div>
  
 </template>
 <script>
 export default {
+  /*
   data() {
     return {
       movies: []
     }
   }
+   */
+  
 }
 </script>

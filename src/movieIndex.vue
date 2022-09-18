@@ -29,7 +29,9 @@
          </template>
          <script>
          export default {
-           props: ['movies'],
+          /**
+           * 
+           * props: ['movies'],
            data: function() {
              return {
                title: 'MovieList'
@@ -38,25 +40,35 @@
            created () {
              this.allMovie()
            },
+           */
+           data() {
+            return {
+             movies: [],
+              title: 'MovieList'
+    }
+  },
            methods: {
              allMovie() {
-               fetch('/server/movie',
+               fetch('/.netlify/functions/movie',
                  { headers: {'Accept': 'application/json'}})
                  .then((response) => response.json())
-                 .then((data) => {
-                   app.movies = data;
+                 .then((result) => {
+                   this.movies = data;
                  })
               },
               deleteMovie(id) {
-                fetch('/server/movie/'+id,
+                fetch('/.netlify/functions/movie/'+id,
                   { headers: {'Content-Type': 'application/json'},
                               method: 'POST',
                     body: JSON.stringify({'_method':'DELETE'})})
-                  .then((data) => {
+                  .then((result) => {
                    this.allMovie();
                    }
                  )
               }
+           },
+           mounted(){
+            this.allMovie()
            }
          }
          </script>

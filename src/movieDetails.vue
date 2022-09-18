@@ -44,6 +44,10 @@
            </div>
          </template>
          <script>
+
+
+import { useRoute } from 'vue-router'
+
          export default {
            props: ['create','edit','show'],
            data: function() {
@@ -53,37 +57,37 @@
              }
            },
            created () {
-            this.findMovie(app.$route.params.id)
+            const route = useRoute();  
+            this.findMovie(route.params.id)
            },
            methods: {
              findMovie: function(id) {
-               var movie = app.movies.find(
-                 function(x) { return x.id == id; });
-               if (movie!=null)
-                 Object.assign(this.movie,movie);
+              fetch('/.netlify/functions/movie/'+id,
+        { headers: {'Accept': 'application/json'}})
+        .then((response) => response.json())
+        .then((result) => {
+          this.movie = result;
+        })
              },
              updateMovie: function() {
-               this.prof['_method'] = 'PUT';
-               var id = app.$route.params.id;
-               fetch('/server/movie/'+id,
-                 { headers: {'Content-Type':'application/json'},
-                   method: 'POST',
-                   body: JSON.stringify(this.movie)})
-                 .then((data) => {
-                   var index = app.movies.findIndex(
-                      function(x) { return x.id == id; });
-                   app.movies[index] = this.movie;
-                   router.push('/movie');
-                 }
-               )
+              this.prof['_method'] = 'PUT';
+      const route = useRoute(); 
+      var id = route.params.id;
+      fetch('/.netlify/functions/movie/'+id,
+        { headers: {'Content-Type':'application/json'},
+          method: 'POST',
+          body: JSON.stringify(this.movie)})
+        .then((data) => {
+          router.push('/movie');
+        }
+      )
              },
              createMovie: function() {
-               fetch('/server/movie',
+               fetch('/.netlify/functions/movie',
                  { headers: {'Content-Type':'application/json'},
                    method: 'POST',
                    body: JSON.stringify(this.movie)})
                  .then((data) => {
-                    app.movies.push(this.book);
                     router.push('/movie');
                  }
                )
