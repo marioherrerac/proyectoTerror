@@ -47,6 +47,13 @@ app.get('/:id', (req, res) => {
     else
         res.json(director);
 })
+app.get('/:id/movies', (req, res) => {
+    let director = directors.find(i => i.id == req.params.id);
+    if (director == undefined)
+        res.status(404).send('Director not found');
+    else
+        res.json(director.movies);
+})
 app.post('/:id', (req, res) => {
     let index = directors.findIndex(i => i.id == req.params.id);
     if (index != -1)

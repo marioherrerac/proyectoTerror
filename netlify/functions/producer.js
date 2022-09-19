@@ -46,6 +46,13 @@ app.get('/:id', (req, res) => {
     else
         res.json(producer);
 })
+app.get('/:id/movies', (req, res) => {
+    let producer = producers.find(i => i.id == req.params.id);
+    if (producer == undefined)
+        res.status(404).send('Producer not found');
+    else
+        res.json(producer.movies);
+})
 app.post('/:id', (req, res) => {
     let index = producers.findIndex(i => i.id == req.params.id);
     if (index != -1)
