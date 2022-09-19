@@ -43,7 +43,7 @@
   },
            methods: {
              allProducer() {
-              fetch('/.netlify/functions/producer',
+              fetch('/.netlify/functions/producers',
                  { headers: {'Accept': 'application/json'}})
                  .then((response) => response.json())
                  .then((result) => {
@@ -51,7 +51,7 @@
                  })
               },
               deleteProducer(id) {
-                fetch('/.netlify/functions/producer/'+id,
+                fetch('/.netlify/functions/producers/'+id,
                   { headers: {'Content-Type': 'application/json'},
                               method: 'POST',
                     body: JSON.stringify({'_method':'DELETE'})})

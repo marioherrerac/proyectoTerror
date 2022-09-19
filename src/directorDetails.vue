@@ -61,7 +61,7 @@ import { useRoute } from 'vue-router'
            },
            methods: {
              findDirector: function(id) {
-              fetch('/.netlify/functions/director/'+id,
+              fetch('/.netlify/functions/directors/'+id,
         { headers: {'Accept': 'application/json'}})
         .then((response) => response.json())
         .then((result) => {
@@ -72,7 +72,7 @@ import { useRoute } from 'vue-router'
               this.prof['_method'] = 'PUT';
       const route = useRoute(); 
       var id = route.params.id;
-      fetch('/.netlify/functions/director/'+id,
+      fetch('/.netlify/functions/directors/'+id,
         { headers: {'Content-Type':'application/json'},
           method: 'POST',
           body: JSON.stringify(this.director)})
@@ -82,7 +82,7 @@ import { useRoute } from 'vue-router'
       )
              },
              createDirector: function() {
-              fetch('/.netlify/functions/director',
+              fetch('/.netlify/functions/directors',
                  { headers: {'Content-Type':'application/json'},
                    method: 'POST',
                    body: JSON.stringify(this.director)})
