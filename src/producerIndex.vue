@@ -47,7 +47,7 @@
                  { headers: {'Accept': 'application/json'}})
                  .then((response) => response.json())
                  .then((result) => {
-                   this.producers = data;
+                   this.producers = result;
                  })
               },
               deleteProducer(id) {

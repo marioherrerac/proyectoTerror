@@ -53,7 +53,7 @@
                  { headers: {'Accept': 'application/json'}})
                  .then((response) => response.json())
                  .then((result) => {
-                   this.movies = data;
+                   this.movies = result;
                  })
               },
               deleteMovie(id) {
