@@ -43,7 +43,7 @@
   },
            methods: {
              allDirector() {
-               fetch('/.netlify/functions/directors',
+               fetch('/.netlify/functions/director',
                  { headers: {'Accept': 'application/json'}})
                  .then((response) => response.json())
                  .then((result) => {
@@ -51,7 +51,7 @@
                  })
               },
               deleteDirector(id) {
-                fetch('/.netlify/functions/directors/'+id,
+                fetch('/.netlify/functions/director/'+id,
                   { headers: {'Content-Type': 'application/json'},
                               method: 'POST',
                     body: JSON.stringify({'_method':'DELETE'})})

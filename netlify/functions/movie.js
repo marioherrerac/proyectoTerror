@@ -88,6 +88,6 @@ app.delete('/:id', (req, res) => {
     }
 });
 exp.use(bodyParser.json());
-exp.use('/.netlify/functions/movies', app);
+exp.use('/.netlify/functions/movie', app);
 module.exports = exp;
 module.exports.handler = serverless(exp);

@@ -62,7 +62,7 @@ import { useRoute } from 'vue-router'
            },
            methods: {
              findMovie: function(id) {
-              fetch('/.netlify/functions/movies/'+id,
+              fetch('/.netlify/functions/movie/'+id,
         { headers: {'Accept': 'application/json'}})
         .then((response) => response.json())
         .then((result) => {
@@ -73,7 +73,7 @@ import { useRoute } from 'vue-router'
               this.prof['_method'] = 'PUT';
       const route = useRoute(); 
       var id = route.params.id;
-      fetch('/.netlify/functions/movies/'+id,
+      fetch('/.netlify/functions/movie/'+id,
         { headers: {'Content-Type':'application/json'},
           method: 'POST',
           body: JSON.stringify(this.movie)})
@@ -83,7 +83,7 @@ import { useRoute } from 'vue-router'
       )
              },
              createMovie: function() {
-               fetch('/.netlify/functions/movies',
+               fetch('/.netlify/functions/movie',
                  { headers: {'Content-Type':'application/json'},
                    method: 'POST',
                    body: JSON.stringify(this.movie)})

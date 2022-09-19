@@ -49,7 +49,7 @@
   },
            methods: {
              allMovie() {
-               fetch('/.netlify/functions/movies',
+               fetch('/.netlify/functions/movie',
                  { headers: {'Accept': 'application/json'}})
                  .then((response) => response.json())
                  .then((result) => {
@@ -57,7 +57,7 @@
                  })
               },
               deleteMovie(id) {
-                fetch('/.netlify/functions/movies/'+id,
+                fetch('/.netlify/functions/movie/'+id,
                   { headers: {'Content-Type': 'application/json'},
                               method: 'POST',
                     body: JSON.stringify({'_method':'DELETE'})})

@@ -74,6 +74,6 @@ app.delete('/:id', (req, res) => {
     }
 })
 exp.use(bodyParser.json());
-exp.use('/.netlify/functions/producers', app);
+exp.use('/.netlify/functions/producer', app);
 module.exports = exp;
 module.exports.handler = serverless(exp);

@@ -61,7 +61,7 @@ import { useRoute } from 'vue-router'
            },
            methods: {
              findProducer: function(id) {
-              fetch('/.netlify/functions/producers/'+id,
+              fetch('/.netlify/functions/producer/'+id,
         { headers: {'Accept': 'application/json'}})
         .then((response) => response.json())
         .then((result) => {
@@ -72,7 +72,7 @@ import { useRoute } from 'vue-router'
               this.prof['_method'] = 'PUT';
       const route = useRoute(); 
       var id = route.params.id;
-      fetch('/.netlify/functions/producers/'+id,
+      fetch('/.netlify/functions/producer/'+id,
         { headers: {'Content-Type':'application/json'},
           method: 'POST',
           body: JSON.stringify(this.producer)})
@@ -82,7 +82,7 @@ import { useRoute } from 'vue-router'
       )
              },
              createProducer: function() {
-              fetch('/.netlify/functions/producers',
+              fetch('/.netlify/functions/producer',
                  { headers: {'Content-Type':'application/json'},
                    method: 'POST',
                    body: JSON.stringify(this.producer)})
