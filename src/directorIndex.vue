@@ -50,6 +50,14 @@
                    this.directors = result;
                  })
               },
+              allDirMovie() {
+               fetch('/.netlify/functions/director/'+id+'/movies',
+                 { headers: {'Accept': 'application/json'}})
+                 .then((response) => response.json())
+                 .then((result) => {
+                   this.directors = result;
+                 })
+              },
               deleteDirector(id) {
                 fetch('/.netlify/functions/director/'+id,
                   { headers: {'Content-Type': 'application/json'},

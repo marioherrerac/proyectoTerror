@@ -50,6 +50,14 @@
                    this.producers = result;
                  })
               },
+              allProdMovie() {
+              fetch('/.netlify/functions/producer'+id+'/movies',
+                 { headers: {'Accept': 'application/json'}})
+                 .then((response) => response.json())
+                 .then((result) => {
+                   this.producers = result;
+                 })
+              },
               deleteProducer(id) {
                 fetch('/.netlify/functions/producer/'+id,
                   { headers: {'Content-Type': 'application/json'},
