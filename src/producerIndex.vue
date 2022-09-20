@@ -13,7 +13,7 @@
                <td>{{producer.genere}}</td>
                <td>
                       <ul>
-                              <li v-for='producer in producers' :key="movie_id"> {{producer.movies.title}}
+                              <li v-for='producer in producers' :key="producer.movies.movie_id"> {{producer.movies.title}}
                       </li>    
                       </ul>
                      
