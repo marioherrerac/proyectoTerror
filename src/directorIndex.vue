@@ -13,7 +13,7 @@
                <td>{{director.fields}}</td>
                <td>
                       <ul>
-                              <li v-for='movies in directors.movies' :key="movie_id"> {{director.movies.title}}
+                              <li v-for='director in directors' :key="movie_id"> {{director.movies.title}}
                       </li>    
                       </ul>
                      
